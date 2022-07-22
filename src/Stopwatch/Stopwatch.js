@@ -10,7 +10,7 @@ function Stopwatch(){
     const startTimer = (_) => {
         let tId = setInterval(()=>{
             setSecPassed((sec)=>sec=sec+1);
-        },1000);
+        },250);
         setTimerId(tId);
     }
 
@@ -25,6 +25,23 @@ function Stopwatch(){
 
     const resumeTimer = ()=>{
         startTimer();
+    }
+
+    const properTimeFormat = (time) =>{
+        if(time<10){
+            time = "0" + time;
+        }
+        return time;
+    }
+    const getFormattedTime = (secCount)=>{
+        let res = "";
+        let sec = secCount % 60;
+        secCount = parseInt(secCount/60);
+        let min = secCount % 60;
+        secCount = parseInt(secCount/60);
+        let hours = secCount % 60;
+        res = properTimeFormat(hours)+":"+properTimeFormat(min)+":"+properTimeFormat(sec);
+        return res;
     }
     return (
     <>
@@ -52,7 +69,7 @@ function Stopwatch(){
             <GenericSpan 
             type={Timer.type}
             className={Timer.className}
-            text={secPassed} 
+            text={getFormattedTime(secPassed)} 
             />
             <GenericSpan 
             type={Pause.type} 
@@ -76,7 +93,7 @@ function Stopwatch(){
             <GenericSpan 
             type={Timer.type}
             className={Timer.className}
-            text={secPassed}
+            text={getFormattedTime(secPassed)}
             />
             <GenericSpan 
             type={Resume.type} 
