@@ -10,7 +10,7 @@ function Stopwatch(){
     const startTimer = (_) => {
         let tId = setInterval(()=>{
             setSecPassed((sec)=>sec=sec+1);
-        },250);
+        },1000);
         setTimerId(tId);
     }
 
